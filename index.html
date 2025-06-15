@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Terminal Portfolio</title>
+    <style>
+        :root {
+            --background-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --prompt-color: #64ffda;
+            --command-color: #ffffff;
+            --output-color: #e0e0e0;
+            --error-color: #ff5555;
+            --link-color: #82aaff;
+            --border-color: #444;
+            --font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 1em;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .terminal {
+            height: 100vh;
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #output {
+            flex-grow: 1;
+        }
+
+        .input-line {
+            display: flex;
+            align-items: center;
+        }
+
+        .prompt {
+            color: var(--prompt-color);
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+
+        #commandInput {
+            background: transparent;
+            border: none;
+            color: var(--command-color);
+            font-family: inherit;
+            font-size: inherit;
+            flex-grow: 1;
+            outline: none;
+            caret-color: var(--prompt-color);
+            padding-right: 2px;
+            border-right: 0.2em solid var(--prompt-color);
+            animation: blink-caret 1s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--prompt-color); }
+        }
+        
+        .output-line {
+            margin-bottom: 5px;
+            word-wrap: break-word;
+        }
+        
+        .command-echo {
+            color: var(--command-color);
+        }
+        
+        .error {
+            color: var(--error-color);
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            text-decoration: none;
+        }
+        
+        .output-line h2 {
+            color: var(--prompt-color);
+            margin: 10px 0 5px 0;
+            font-size: 1.1em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .output-line ul {
+            list-style-type: none;
+            padding-left: 15px;
+        }
+        
+        .output-line li {
+            margin-bottom: 5px;
+        }
+        
+        .output-line strong {
+            color: var(--command-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="terminal" class="terminal">
+        <div id="output"></div>
+        <div class="input-line">
+            <span class="prompt">user@portfolio:~$</span>
+            <input type="text" id="commandInput" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        </div>
+    </div>
+
+    <script>
+        const yourName = "Akshdeep Singh";
+        const profession = "Student | Web Developer & Data Analyst";
+
+        const portfolioData = {
+            about: `Hello! I'm ${yourName}, a passionate Web Developer & Data Analyst with a love for creating clean, efficient, and user-friendly web applications. I thrive on solving complex problems and continuously learning new technologies.`,
+            skills: {
+                "Languages": ["JavaScript", "Python", "HTML5", "CSS","PHP"],
+                "Frameworks & Libraries": ["Pandas", "Numpy", "Matplotlib", "Jupyter"],
+                "Databases": ["MySQL","phpMyAdmin"],
+                "Tools & Platforms": ["Git & GitHub", "Docker", "Wordpress"]
+            },
+            projects: [
+                {
+                    name: "Cricket Match Simulator 🏏",
+                    description: "A Python-based cricket match simulator that provides a detailed, over-by-over simulation of T20/limited overs cricket matches with realistic gameplay mechanics and statistics tracking.",
+                    url: "https://github.com/akshdeepsingh7/cricket-simulator"
+                },
+                {
+                    name: "JEE Simulation 📚",
+                    description: "A comprehensive, interactive mock test application designed specifically for JEE Main preparation. Features a modern, responsive interface with real-time timer, question palette, and detailed scoring system.",
+                    url: "https://github.com/akshdeepsingh7/Jee-Simulation"
+                },
+                {
+                    name: "Cricket Score API 🏏",
+                    description: "A simple PHP-based API that fetches live cricket scores from Cricbuzz URLs. 🎯",
+                    url: "https://github.com/akshdeepsingh7/cricket-score-api"
+                },
+                {
+                    name: "🐍 Neon Snake - 10 Game Modes",
+                    description: "A modern, neon-styled take on the classic Snake game featuring 10 unique game modes, stunning visual effects, and responsive design. Built with vanilla HTML5, CSS3, and JavaScript.",
+                    url: "https://github.com/akshdeepsingh7/neon-snake"
+                }
+            ],
+            contact: {
+                linkedin: "https://linkedin.com/in/akshdeep--singh",
+                github: "https://github.com/akshdeepsingh7"
+            }
+        };
+        
+        const welcomeMessage = `
+<h2>${yourName} // ${profession}</h2>
+<br>
+Welcome to my interactive terminal portfolio.
+<br>
+Type '<strong>help</strong>' to see a list of available commands.
+`;
+
+        const terminal = document.getElementById('terminal');
+        const output = document.getElementById('output');
+        const commandInput = document.getElementById('commandInput');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            appendOutput(welcomeMessage);
+        });
+
+        terminal.addEventListener('click', () => {
+            commandInput.focus();
+        });
+
+        commandInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = commandInput.value.trim().toLowerCase();
+                const prompt = `<span class="prompt">user@portfolio:~$</span>`;
+                
+                appendOutput(`${prompt}<span class="command-echo">${command}</span>`);
+
+                if (command) {
+                    processCommand(command);
+                }
+                
+                commandInput.value = '';
+                scrollToBottom();
+            }
+        });
+
+        function processCommand(command) {
+            const args = command.split(' ');
+            const cmd = args[0];
+
+            switch (cmd) {
+                case 'help':
+                    const helpText = `
+Available commands:
+<strong>help</strong>      - Shows this list of commands.
+<strong>about</strong>     - Displays a short bio.
+<strong>skills</strong>    - Lists technical skills.
+<strong>projects</strong>  - Shows recent projects.
+<strong>contact</strong>   - Displays contact information.
+<strong>clear</strong>     - Clears the terminal screen.
+<strong>sudo</strong>      - You know what this does...`;
+                    appendOutput(helpText);
+                    break;
+                case 'about':
+                    appendOutput(portfolioData.about);
+                    break;
+                case 'skills':
+                    let skillsOutput = '<h2>Technical Skills</h2>';
+                    for (const category in portfolioData.skills) {
+                        skillsOutput += `<strong>${category}:</strong><ul>`;
+                        portfolioData.skills[category].forEach(skill => {
+                            skillsOutput += `<li>- ${skill}</li>`;
+                        });
+                        skillsOutput += `</ul>`;
+                    }
+                    appendOutput(skillsOutput);
+                    break;
+                case 'projects':
+                    let projectsOutput = '<h2>Projects</h2><ul>';
+                    portfolioData.projects.forEach(p => {
+                        projectsOutput += `<li><strong>${p.name}</strong> - ${p.description} <a href="${p.url}" target="_blank">[link]</a></li>`;
+                    });
+                    projectsOutput += `</ul>`;
+                    appendOutput(projectsOutput);
+                    break;
+                case 'contact':
+                    const c = portfolioData.contact;
+                    const contactOutput = `
+<h2>Contact Information</h2>
+<ul>
+  <li><strong>LinkedIn:</strong> <a href="${c.linkedin}" target="_blank">${c.linkedin}</a></li>
+  <li><strong>GitHub:</strong> <a href="${c.github}" target="_blank">${c.github}</a></li>
+</ul>`;
+                    appendOutput(contactOutput);
+                    break;
+                case 'clear':
+                    output.innerHTML = '';
+                    break;
+                case 'sudo':
+                    appendOutput('<span class="error">User is not in the sudoers file. This incident will be reported.</span>');
+                    break;
+                default:
+                    appendOutput(`<span class="error">Command not found: ${command}. Type 'help' for a list of commands.</span>`);
+                    break;
+            }
+        }
+        
+        function appendOutput(html) {
+            const line = document.createElement('div');
+            line.classList.add('output-line');
+            line.innerHTML = html;
+            output.appendChild(line);
+        }
+
+        function scrollToBottom() {
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+    </script>
+</body>
+</html>
