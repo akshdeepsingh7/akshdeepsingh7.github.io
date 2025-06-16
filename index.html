@@ -160,6 +160,7 @@
                     url: "https://github.com/akshdeepsingh7/neon-snake"
                 }
             ],
+            blog: "https://akshdeepsingh7.github.io/blog",
             contact: {
                 linkedin: "https://linkedin.com/in/akshdeep--singh",
                 github: "https://github.com/akshdeepsingh7"
@@ -214,6 +215,7 @@ Available commands:
 <strong>about</strong>     - Displays a short bio.
 <strong>skills</strong>    - Lists technical skills.
 <strong>projects</strong>  - Shows recent projects.
+<strong>blog</strong>      - Displays the link to my blog.
 <strong>contact</strong>   - Displays contact information.
 <strong>clear</strong>     - Clears the terminal screen.
 <strong>sudo</strong>      - You know what this does...`;
@@ -240,6 +242,15 @@ Available commands:
                     });
                     projectsOutput += `</ul>`;
                     appendOutput(projectsOutput);
+                    break;
+                case 'blog':
+                    const blogUrl = portfolioData.blog;
+                    const blogOutput = `
+<h2>My Blog</h2>
+<ul>
+  <li>Feel free to check out my articles here: <a href="${blogUrl}" target="_blank">${blogUrl}</a></li>
+</ul>`;
+                    appendOutput(blogOutput);
                     break;
                 case 'contact':
                     const c = portfolioData.contact;
