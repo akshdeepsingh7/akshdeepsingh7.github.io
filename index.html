@@ -3,302 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akshdeep Singh - Terminal Portfolio</title>
-    <meta name="description" content="Akshdeep Singh's interactive terminal portfolio. Student, Web Developer, and Data Analyst passionate about creating clean, efficient, and user-friendly applications.">
-    <meta name="keywords" content="Akshdeep Singh, portfolio, web developer, data analyst, projects, programming, JavaScript, Python, PHP, MySQL, HTML, CSS, GitHub">
+    <title>Akshdeep Singh | Full Stack Developer</title>
+    <meta name="description" content="Portfolio of Akshdeep Singh, a Full Stack Developer and Automation Enthusiast specializing in Go, Supabase, Python, and backend systems.">
+    <meta name="keywords" content="Akshdeep Singh, Full Stack Developer, Go, Golang, Supabase, Python, Automation, Data Analyst, Backend Engineer, Software Developer">
     <meta name="author" content="Akshdeep Singh">
-    <meta property="og:title" content="Akshdeep Singh - Terminal Portfolio">
-    <meta property="og:description" content="An interactive terminal-style portfolio showcasing projects, skills, and contact details.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#050505">
+    
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://akshdeepsingh7.github.io">
-    <meta property="og:image" content="https://akshdeepsingh7.github.io/thumbnail.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Akshdeep Singh - Terminal Portfolio">
-    <meta name="twitter:description" content="Interactive terminal portfolio of Akshdeep Singh, Web Developer & Data Analyst.">
-    <meta name="twitter:image" content="https://akshdeepsingh7.github.io/thumbnail.jpg">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="theme-color" content="#1a1a1a">
+    <meta property="og:title" content="Akshdeep Singh | Full Stack Developer">
+    <meta property="og:description" content="Building scalable web applications and backend systems using Go, Supabase, and Python.">
+    <meta property="og:site_name" content="Akshdeep Singh Portfolio">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Akshdeep_Singh7">
+    <meta name="twitter:creator" content="@Akshdeep_Singh7">
+    <meta name="twitter:title" content="Akshdeep Singh | Full Stack Developer">
+    <meta name="twitter:description" content="Full Stack Developer specializing in Go, Supabase, and Automation.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --background-color: #1a1a1a;
-            --text-color: #e0e0e0;
-            --prompt-color: #64ffda;
-            --command-color: #ffffff;
-            --output-color: #e0e0e0;
-            --error-color: #ff5555;
-            --link-color: #82aaff;
-            --border-color: #444;
-            --font-family: 'Courier New', Courier, monospace;
+            --bg: #050505;
+            --surface: #121212;
+            --border: #262626;
+            --text: #e5e5e5;
+            --text-dim: #737373;
+            --accent: #3591F7;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            font-size: 1em;
-            line-height: 1.5;
-            margin: 0;
-            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 5rem 1.5rem;
         }
 
-        .terminal {
-            height: 100vh;
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        .app {
+            max-width: 720px;
             width: 100%;
-            padding: 15px;
-            box-sizing: border-box;
-            overflow-y: auto;
             display: flex;
             flex-direction: column;
-        }
-        
-        #output {
-            flex-grow: 1;
+            gap: 4.5rem;
+            position: relative;
         }
 
-        .input-line {
+        .glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(53,145,247,0.08) 0%, rgba(0,0,0,0) 70%);
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .role {
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            color: #fff;
+        }
+
+        .bio {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 95%;
+            font-weight: 300;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-link {
+            color: var(--text-dim);
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover { color: var(--accent); transform: translateY(-2px); }
+        .social-link svg { width: 22px; height: 22px; fill: currentColor; }
+
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            animation: slideUp 0.6s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .focus-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .focus-card:hover { border-color: var(--accent); }
+
+        .focus-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .focus-card p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: slideUp 0.6s ease 0.4s forwards;
+        }
+
+        h2 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            font-weight: 600;
             display: flex;
             align-items: center;
+            gap: 12px;
         }
 
-        .prompt {
-            color: var(--prompt-color);
-            margin-right: 8px;
-            white-space: nowrap;
+        h2::after {
+            content: '';
+            height: 1px;
+            flex: 1;
+            background: var(--border);
         }
 
-        #commandInput {
-            background: transparent;
-            border: none;
-            color: var(--command-color);
-            font-family: inherit;
-            font-size: inherit;
-            flex-grow: 1;
-            outline: none;
-            caret-color: var(--prompt-color);
-            padding-right: 2px;
-            border-right: 0.2em solid var(--prompt-color);
-            animation: blink-caret 1s step-end infinite;
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
         }
 
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--prompt-color); }
-        }
-        
-        .output-line {
-            margin-bottom: 5px;
-            word-wrap: break-word;
-        }
-        
-        .command-echo {
-            color: var(--command-color);
-        }
-        
-        .error {
-            color: var(--error-color);
+        .stack-group h3 {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            font-family: var(--font-mono);
         }
 
-        a {
-            color: var(--link-color);
-            text-decoration: underline;
-        }
-        
-        a:hover {
-            text-decoration: none;
-        }
-        
-        .output-line h2 {
-            color: var(--prompt-color);
-            margin: 10px 0 5px 0;
-            font-size: 1.1em;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
         }
 
-        .output-line ul {
-            list-style-type: none;
-            padding-left: 15px;
-        }
-        
-        .output-line li {
-            margin-bottom: 5px;
-        }
-        
-        .output-line strong {
-            color: var(--command-color);
+        .tag {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            background: rgba(255,255,255,0.03);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            cursor: default;
         }
 
+        .tag:hover {
+            border-color: var(--border);
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; } to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .stack-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="terminal" class="terminal">
-        <div id="output"></div>
-        <div class="input-line">
-            <span class="prompt">user@portfolio:~$</span>
-            <input type="text" id="commandInput" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <div class="app">
+        <div class="glow"></div>
+
+        <header>
+            <span class="role">Full Stack Developer & Analyst</span>
+            <h1>Akshdeep Singh</h1>
+            <p class="bio">
+                Building scalable web applications and backend systems. Passionate about automation, data analysis, and crafting efficient digital solutions.
+            </p>
+            
+            <div class="social-row">
+                <a href="https://linkedin.com/in/akshdeep--singh" class="social-link" target="_blank" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://github.com/akshdeepsingh7" class="social-link" target="_blank" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://x.com/Akshdeep_Singh7" class="social-link" target="_blank" aria-label="X">
+                    <svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                </a>
+            </div>
+        </header>
+
+        <div class="focus-grid">
+            <div class="focus-card">
+                <h3>Backend Architecture</h3>
+                <p>Developing robust web applications and APIs primarily using Go and Supabase.</p>
+            </div>
+            <div class="focus-card">
+                <h3>Automation</h3>
+                <p>Streamlining workflows and data analysis processes with Python scripts and automation tools.</p>
+            </div>
+            <div class="focus-card">
+                <h3>Monitoring & AI</h3>
+                <p>Experimenting with system monitoring observability and building AI-powered apps.</p>
+            </div>
         </div>
+
+        <section>
+            <h2>Technology Stack</h2>
+            <div class="stack-grid">
+                
+                <div class="stack-group">
+                    <h3>Languages</h3>
+                    <div class="tags">
+                        <span class="tag">Go</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Bash Script</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="stack-group">
+                    <h3>Frontend & 3D</h3>
+                    <div class="tags">
+                        <span class="tag">Three.js</span>
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">TailwindCSS</span>
+                        <span class="tag">Bootstrap</span>
+                    </div>
+                </div>
+
+                <div class="stack-group">
+                    <h3>Backend & Databases</h3>
+                    <div class="tags">
+                        <span class="tag">Supabase</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">WordPress</span>
+                    </div>
+                </div>
+
+                <div class="stack-group">
+                    <h3>Cloud & DevOps</h3>
+                    <div class="tags">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Cloudflare</span>
+                        <span class="tag">Vercel</span>
+                        <span class="tag">Netlify</span>
+                        <span class="tag">GitHub Pages</span>
+                        <span class="tag">GitHub Actions</span>
+                    </div>
+                </div>
+
+                <div class="stack-group">
+                    <h3>Data, Tools & Docs</h3>
+                    <div class="tags">
+                        <span class="tag">Pandas</span>
+                        <span class="tag">NumPy</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">Google Colab</span>
+                        <span class="tag">Jupyter Notebook</span>
+                        <span class="tag">LaTeX</span>
+                        <span class="tag">VS Code</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </div>
 
-    <script>
-        const yourName = "Akshdeep Singh";
-        const profession = "Student | Web Developer & Data Analyst";
-
-        const portfolioData = {
-            about: `Hello! I'm ${yourName}, a passionate Web Developer & Data Analyst with a love for creating clean, efficient, and user-friendly web applications. I thrive on solving complex problems and continuously learning new technologies.`,
-            skills: {
-                "Languages": ["JavaScript", "Python", "HTML5", "CSS","PHP"],
-                "Frameworks & Libraries": ["Pandas", "Numpy", "Matplotlib", "Jupyter"],
-                "Databases": ["MySQL","phpMyAdmin"],
-                "Tools & Platforms": ["Git & GitHub", "Docker", "Wordpress"]
-            },
-            projects: [
-                {
-                    name: "Cricket Match Simulator 🏏",
-                    description: "A Python-based cricket match simulator that provides a detailed, over-by-over simulation of T20/limited overs cricket matches with realistic gameplay mechanics and statistics tracking.",
-                    url: "https://github.com/akshdeepsingh7/cricket-simulator"
-                },
-                {
-                    name: "JEE Simulation 📚",
-                    description: "A comprehensive, interactive mock test application designed specifically for JEE Main preparation. Features a modern, responsive interface with real-time timer, question palette, and detailed scoring system.",
-                    url: "https://github.com/akshdeepsingh7/Jee-Simulation"
-                },
-                {
-                    name: "Cricket Score API 🏏",
-                    description: "A simple PHP-based API that fetches live cricket scores from Cricbuzz URLs. 🎯",
-                    url: "https://github.com/akshdeepsingh7/cricket-score-api"
-                },
-                {
-                    name: "🐍 Neon Snake - 10 Game Modes",
-                    description: "A modern, neon-styled take on the classic Snake game featuring 10 unique game modes, stunning visual effects, and responsive design. Built with vanilla HTML5, CSS3, and JavaScript.",
-                    url: "https://github.com/akshdeepsingh7/neon-snake"
-                }
-            ],
-            blog: "https://akshdeepsingh7.github.io/blog",
-            contact: {
-                linkedin: "https://linkedin.com/in/akshdeep--singh",
-                github: "https://github.com/akshdeepsingh7"
-            }
-        };
-        
-        const welcomeMessage = `
-<h2>${yourName} // ${profession}</h2>
-<br>
-Welcome to my interactive terminal portfolio.
-<br>
-Type '<strong>help</strong>' to see a list of available commands.
-`;
-
-        const terminal = document.getElementById('terminal');
-        const output = document.getElementById('output');
-        const commandInput = document.getElementById('commandInput');
-
-        document.addEventListener('DOMContentLoaded', () => {
-            appendOutput(welcomeMessage);
-        });
-
-        terminal.addEventListener('click', () => {
-            commandInput.focus();
-        });
-
-        commandInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const command = commandInput.value.trim().toLowerCase();
-                const prompt = `<span class="prompt">user@portfolio:~$</span>`;
-                
-                appendOutput(`${prompt}<span class="command-echo">${command}</span>`);
-
-                if (command) {
-                    processCommand(command);
-                }
-                
-                commandInput.value = '';
-                scrollToBottom();
-            }
-        });
-
-        function processCommand(command) {
-            const args = command.split(' ');
-            const cmd = args[0];
-
-            switch (cmd) {
-                case 'help':
-                    const helpText = `
-Available commands:
-<strong>help</strong>      - Shows this list of commands.
-<strong>about</strong>     - Displays a short bio.
-<strong>skills</strong>    - Lists technical skills.
-<strong>projects</strong>  - Shows recent projects.
-<strong>blog</strong>      - Displays the link to my blog.
-<strong>contact</strong>   - Displays contact information.
-<strong>clear</strong>     - Clears the terminal screen.
-<strong>sudo</strong>      - You know what this does...`;
-                    appendOutput(helpText);
-                    break;
-                case 'about':
-                    appendOutput(portfolioData.about);
-                    break;
-                case 'skills':
-                    let skillsOutput = '<h2>Technical Skills</h2>';
-                    for (const category in portfolioData.skills) {
-                        skillsOutput += `<strong>${category}:</strong><ul>`;
-                        portfolioData.skills[category].forEach(skill => {
-                            skillsOutput += `<li>- ${skill}</li>`;
-                        });
-                        skillsOutput += `</ul>`;
-                    }
-                    appendOutput(skillsOutput);
-                    break;
-                case 'projects':
-                    let projectsOutput = '<h2>Projects</h2><ul>';
-                    portfolioData.projects.forEach(p => {
-                        projectsOutput += `<li><strong>${p.name}</strong> - ${p.description} <a href="${p.url}" target="_blank">[link]</a></li>`;
-                    });
-                    projectsOutput += `</ul>`;
-                    appendOutput(projectsOutput);
-                    break;
-                case 'blog':
-                    const blogUrl = portfolioData.blog;
-                    const blogOutput = `
-<h2>My Blog</h2>
-<ul>
-  <li>Feel free to check out my articles here: <a href="${blogUrl}" target="_blank">${blogUrl}</a></li>
-</ul>`;
-                    appendOutput(blogOutput);
-                    break;
-                case 'contact':
-                    const c = portfolioData.contact;
-                    const contactOutput = `
-<h2>Contact Information</h2>
-<ul>
-  <li><strong>LinkedIn:</strong> <a href="${c.linkedin}" target="_blank">${c.linkedin}</a></li>
-  <li><strong>GitHub:</strong> <a href="${c.github}" target="_blank">${c.github}</a></li>
-</ul>`;
-                    appendOutput(contactOutput);
-                    break;
-                case 'clear':
-                    output.innerHTML = '';
-                    break;
-                case 'sudo':
-                    appendOutput('<span class="error">User is not in the sudoers file. This incident will be reported.</span>');
-                    break;
-                default:
-                    appendOutput(`<span class="error">Command not found: ${command}. Type 'help' for a list of commands.</span>`);
-                    break;
-            }
-        }
-        
-        function appendOutput(html) {
-            const line = document.createElement('div');
-            line.classList.add('output-line');
-            line.innerHTML = html;
-            output.appendChild(line);
-        }
-
-        function scrollToBottom() {
-            terminal.scrollTop = terminal.scrollHeight;
-        }
-
-    </script>
 </body>
 </html>
